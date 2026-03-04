@@ -1,0 +1,8 @@
+[window]
+title = "RustGraph(CPU Rasterizer)"
+width = 1980
+height = 1080
+
+[rasterizer]
+culling_enabled = false
+ssaa_scale = 2
