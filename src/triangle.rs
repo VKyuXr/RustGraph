@@ -5,6 +5,7 @@ pub struct Triangle {
     pub color: [Vector3<f32>; 3],       // 颜色
     pub tex_coords: [Vector2<f32>; 3],  // 纹理坐标
     pub normal: [Vector3<f32>; 3],      // 法线向量
+    pub texture_id: Option<usize>,      // 贴图索引
 }
 
 impl Triangle {
@@ -15,6 +16,7 @@ impl Triangle {
             color: [Vector3::<f32>::zeros(); 3],
             tex_coords: [Vector2::<f32>::zeros(); 3],
             normal: [Vector3::<f32>::zeros(); 3],
+            texture_id: None,
         }
     }
 

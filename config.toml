@@ -1,8 +1,28 @@
 [window]
 title = "RustGraph(CPU Rasterizer)"
-width = 1980
-height = 1080
+width = 1080
+height = 1920
 
 [rasterizer]
-culling_enabled = false
-ssaa_scale = 2
+culling_enabled = true
+ssaa_scale = 4
+tile_width = 128
+tile_height = 128
+thread_count = 0
+background_color = [0, 0, 0, 0]
+
+[camera]
+eye_pos = [0.0, 0.7, 2.0]
+eye_rot = [0.0, 0.0, 0.0]
+model_pos = [0.0, 0.0, 0.0]
+model_rot = [0.0, 0.0, 0.0]
+fov = 45.0
+near = 0.1
+far = 100.0
+
+[model]
+path = "./model/Chisa.gltf"
+
+[output]
+png_path = "./output.png"
+debug_dir = "./debug_output"

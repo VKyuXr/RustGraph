@@ -11,7 +11,7 @@ gltf = "1.4.1"
 image = "0.25.9"
 log = "0.4.29"
 nalgebra = "0.34.1"
-pollster = "0.4.0"
+rayon = "1.10"
 serde = { version = "1.0.228", features = ["derive"] }
 softbuffer = "0.4.8"
 toml = "1.0.3"

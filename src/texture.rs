@@ -8,6 +8,7 @@ pub struct Texture {
     image_data: DynamicImage,
     pub width: u32,
     pub height: u32,
+    pub has_alpha: bool,
 }
 
 impl Texture {
@@ -18,10 +19,20 @@ impl Texture {
         let width = img.width();
         let height = img.height();
 
+        let has_alpha = img.pixels().any(|(_, _, p)| {
+            let channels = p.channels();
+            if channels.len() > 3 {
+                channels[3] < 250
+            } else {
+                false
+            }
+        });
+
         Ok(Texture {
             image_data: img,
             width,
             height,
+            has_alpha,
         })
     }
 
@@ -46,7 +57,7 @@ impl Texture {
     // 最近邻插值
     pub fn sample_nearest(&self, u: f32, v: f32) -> Vector4<f32> {
         let x = (u * self.width as f32).floor() as i32;
-        let y = ((1.0 - v) * self.height as f32).floor() as i32;
+        let y = (v * self.height as f32).floor() as i32;
         let x_clamped = x.clamp(0, self.width as i32 - 1) as u32;
         let y_clamped = y.clamp(0, self.height as i32 - 1) as u32;
         let pixel = self.image_data.get_pixel(x_clamped, y_clamped);
@@ -57,7 +68,7 @@ impl Texture {
     // 线性插值
     pub fn sample_linear(&self, u: f32, v: f32) -> Vector4<f32> {
         let x_float = u * self.width as f32 - 0.5;
-        let y_float = (1.0 - v) * self.height as f32 - 0.5;
+        let y_float = v * self.height as f32 - 0.5;
 
         let x0 = x_float.floor() as i32;
         let y0 = y_float.floor() as i32;
